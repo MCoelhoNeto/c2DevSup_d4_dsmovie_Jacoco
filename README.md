@@ -9,26 +9,26 @@ DESAFIO: - Desafio DSMovie Jacoco (cap5)
 "Abaixo estão os testes unitários que você deverá implementar. Com todos os testes, o Jacoco deve reportar 100% de cobertura, mas o mínimo para aprovação no desafio são 12 dos 15 testes.:"
 
 #### MovieServiceTests:
-findAllShouldReturnPagedMovieDTO
-findByIdShouldReturnMovieDTOWhenIdExists
-findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
-insertShouldReturnMovieDTO
-updateShouldReturnMovieDTOWhenIdExists
-updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
-deleteShouldDoNothingWhenIdExists
-deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
-deleteShouldThrowDatabaseExceptionWhenDependentId
+- findAllShouldReturnPagedMovieDTO
+- findByIdShouldReturnMovieDTOWhenIdExists
+- findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
+- insertShouldReturnMovieDTO
+- updateShouldReturnMovieDTOWhenIdExists
+- updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
+- deleteShouldDoNothingWhenIdExists
+- deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist
+- deleteShouldThrowDatabaseExceptionWhenDependentId
 
 
 #### ScoreServiceTests:
-saveScoreShouldReturnMovieDTO
-saveScoreShouldThrowResourceNotFoundExceptionWhenNonExistingMovieId
+- saveScoreShouldReturnMovieDTO
+- saveScoreShouldThrowResourceNotFoundExceptionWhenNonExistingMovieId
 
 #### UserServiceTests:
-authenticatedShouldReturnUserEntityWhenUserExists
-authenticatedShouldThrowUsernameNotFoundExceptionWhenUserDoesNotExists
-loadUserByUsernameShouldReturnUserDetailsWhenUserExists
-loadUserByUsernameShouldThrowUsernameNotFoundExceptionWhenUserDoesNotExists
+- authenticatedShouldReturnUserEntityWhenUserExists
+- authenticatedShouldThrowUsernameNotFoundExceptionWhenUserDoesNotExists
+- loadUserByUsernameShouldReturnUserDetailsWhenUserExists
+- loadUserByUsernameShouldThrowUsernameNotFoundExceptionWhenUserDoesNotExists
 
 "
 
