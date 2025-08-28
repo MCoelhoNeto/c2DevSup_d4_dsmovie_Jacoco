@@ -33,7 +33,7 @@ public class ResourceServerConfig {
 	@Bean
 	@Profile("test")
 	@Order(1)
-	SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
 
 		http.securityMatcher(PathRequest.toH2Console()).csrf(csrf -> csrf.disable())
 				.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
@@ -42,7 +42,7 @@ public class ResourceServerConfig {
 
 	@Bean
 	@Order(3)
-	SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable());
 		http.authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
@@ -52,7 +52,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	JwtAuthenticationConverter jwtAuthenticationConverter() {
+	public JwtAuthenticationConverter jwtAuthenticationConverter() {
 		JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 		grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
 		grantedAuthoritiesConverter.setAuthorityPrefix("");
@@ -63,7 +63,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
+	public CorsConfigurationSource corsConfigurationSource() {
 
 		String[] origins = corsOrigins.split(",");
 
@@ -79,7 +79,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	FilterRegistrationBean<CorsFilter> corsFilter() {
+	public FilterRegistrationBean<CorsFilter> filterRegistrationBeanCorsFilter() {
 		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
 				new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);

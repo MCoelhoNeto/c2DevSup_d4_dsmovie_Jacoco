@@ -69,7 +69,7 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	@Order(2)
-	SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
 
 		http.securityMatcher("oauth2/**", "/.well-known/**").with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
 
@@ -86,22 +86,22 @@ public class AuthorizationServerConfig {
 	}
 
 	@Bean
-	OAuth2AuthorizationService authorizationService() {
+	public OAuth2AuthorizationService authorizationService() {
 		return new InMemoryOAuth2AuthorizationService();
 	}
 
 	@Bean
-	OAuth2AuthorizationConsentService oAuth2AuthorizationConsentService() {
+	public OAuth2AuthorizationConsentService oAuth2AuthorizationConsentService() {
 		return new InMemoryOAuth2AuthorizationConsentService();
 	}
 
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public  PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	RegisteredClientRepository registeredClientRepository() {
+	public  RegisteredClientRepository registeredClientRepository() {
 		// @formatter:off
 		RegisteredClient registeredClient = RegisteredClient
 			.withId(UUID.randomUUID().toString())
@@ -119,7 +119,7 @@ public class AuthorizationServerConfig {
 	}
 
 	@Bean
-	TokenSettings tokenSettings() {
+	public TokenSettings tokenSettings() {
 		// @formatter:off
 		return TokenSettings.builder()
 			.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
@@ -129,17 +129,17 @@ public class AuthorizationServerConfig {
 	}
 
 	@Bean
-	ClientSettings clientSettings() {
+	public ClientSettings clientSettings() {
 		return ClientSettings.builder().build();
 	}
 
 	@Bean
-	AuthorizationServerSettings authorizationServerSettings() {
+	public AuthorizationServerSettings authorizationServerSettings() {
 		return AuthorizationServerSettings.builder().build();
 	}
 
 	@Bean
-	OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator() {
+	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator() {
 		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource());
 		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
 		jwtGenerator.setJwtCustomizer(tokenCustomizer());
@@ -148,7 +148,7 @@ public class AuthorizationServerConfig {
 	}
 
 	@Bean
-	OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
+	public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
 		return context -> {
 			OAuth2ClientAuthenticationToken principal = context.getPrincipal();
 			CustomUserAuthorities user = (CustomUserAuthorities) principal.getDetails();
@@ -164,12 +164,12 @@ public class AuthorizationServerConfig {
 	}
 
 	@Bean
-	JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
 		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
 	}
 
 	@Bean
-	JWKSource<SecurityContext> jwkSource() {
+	public JWKSource<SecurityContext> jwkSource() {
 		RSAKey rsaKey = generateRsa();
 		JWKSet jwkSet = new JWKSet(rsaKey);
 		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
